@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-
+using Data.Concrete;
 using System.Net.Http;
 using System.Net;
+using Entities.DTO;
+using Entities.Concrete;
+using Services.Concrete;
 
 namespace WebApi.Controllers
 {
@@ -14,15 +17,16 @@ namespace WebApi.Controllers
     public class ResponseController : Controller
     {
         private readonly IMapper map;
-        //private readonly BaseDal context;
+        private readonly BaseDal context;
+        private readonly ResponseService rest;
 
-        //public ResponseController(IMapper mapper,BaseDal dal)
-        //{
+        public ResponseController(IMapper mapper, BaseDal dal, ResponseService r)
+        {
 
-
-        //    map = mapper;
-        //    context = dal;
-        //}
+            
+            map = mapper;
+            context = dal;
+        }
 
         [HttpGet]
         [Route("api/response")]
@@ -32,16 +36,19 @@ namespace WebApi.Controllers
             return View();
         }
 
-        //public HttpResponseMessage response()
-        //{
-        //    //var res = new HttpResponseMessage();
-        //    //var re = new ResponseDTO();
-        //    //re.name = "myname";
-        //    //var r = map.Map<Response>(re);
-        //    //context.Add(r);
-        //    //context.SaveChanges();
-        //    //return res;
+        public HttpResponseMessage response(Response rs)
+        {
 
-        //}
+            rest.add();
+            var res = new HttpResponseMessage();
+            context.Add(rs);
+            //var re = new ResponseDTO();
+            //re.name = "myname";
+            var r = map.Map<Response>(rs);
+            //context.Add(r);
+            //context.SaveChanges();
+            return res;
+
+        }
     }
 }

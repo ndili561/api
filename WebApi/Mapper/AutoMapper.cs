@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Entities.Concrete;
+using Entities.DTO;
 
 
 namespace WebApi.Mapper
@@ -11,8 +13,8 @@ namespace WebApi.Mapper
     {
         public AutoMapper()
         {
-            //CreateMap<Response, ResponseDTO>().ForMember(src => src.name, opt => opt.MapFrom(src => src.email));
-            //CreateMap<ResponseDTO, Response>();
+            CreateMap<Response, ResponseDTO>().ForMember(src => src.name, opt => opt.MapFrom(src => src.email));
+            CreateMap<ResponseDTO, Response>();
         }
     }
 }
